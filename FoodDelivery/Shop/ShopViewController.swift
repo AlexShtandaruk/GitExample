@@ -8,46 +8,51 @@ class ShopViewController: TypeFirstViewController {
     
     private var collectionViewFL = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     
-    private var pageControllFL: UIPageControl = {
-        let page = UIPageControl()
-        page.translatesAutoresizingMaskIntoConstraints = false
-        page.currentPage = 0
-        page.pageIndicatorTintColor = .lightGray
-        page.currentPageIndicatorTintColor = .darkGray
-        return page
-    }()
+    private var pageControllFL = UIPageControl()
     
-    private lazy var subView: [UIView] = [self.adressButton, self.loginButton, self.searchTextField, self.collectionViewFL, self.pageControllFL]
-    
+    private lazy var subView: [UIView] = [self.adressButton,
+                                          self.loginButton,
+                                          self.searchTextField,
+                                          self.collectionViewFL,
+                                          self.pageControllFL]
 
     override func viewDidLoad() {
         super.viewDidLoad()
     
         setupView(subViewVC: subView)
-        searchTextField.addTarget(self, action: #selector(pressedSearchTextField), for: .touchDown)
+        
         createDelegateDataSource(collectionView: collectionViewFL)
-        createLayout(layout: layoutFL,
-                     chosenDirection: .horizontal,
-                     minimumLineSpacing: 15)
-        createCollectionView(collectionView: collectionViewFL,
-                             layout: layoutFL)
+        
+        createLayout(layout: layoutFL, chosenDirection: .horizontal, minimumLineSpacing: 1)
+        
+        createCollectionView(collectionView: collectionViewFL, layout: layoutFL)
+        collectionViewFL.register(CustomTwoCVC.self, forCellWithReuseIdentifier: CustomTwoCVC.reuseID)
+        
+        createPageController(page: pageControllFL)
+        pageControllFL.addTarget(self, action: #selector(pageDidChange), for: .valueChanged)
+
+        createButtonImage(button: searchButton,
+                          image: imageSearch!,
+                          tintColor: .black)
         createButtonText(button: adressButton,
                          text: "Pushkina streen 90'th",
                          sizeFont: 23,
                          colorForNormal: .darkGray,
                          colorForHighlighted: .black)
-        adressButton.addTarget(self, action: #selector(pressedButtonAdress), for: .touchUpInside)
         createButtonImage(button: loginButton,
                           image: imageLogin!,
                           tintColor: .customRed)
+        
+        searchTextField.addTarget(self, action: #selector(pressedSearchTextField), for: .touchDown)
+        adressButton.addTarget(self, action: #selector(pressedButtonAdress), for: .touchUpInside)
         loginButton.addTarget(self, action: #selector(pressedButtonLogin), for: .touchUpInside)
+        searchButton.addTarget(self, action: #selector(pressedSearchTextField), for: .touchUpInside)
+        
         setupConstraint()
         setupModel()
-        
         pageContorollIndex()
         
     }
-    
     
     func pageContorollIndex() {
         pageControllFL.numberOfPages = dataCVFirstLine.count / 2
@@ -59,7 +64,6 @@ class ShopViewController: TypeFirstViewController {
     }
     
     func setupConstraint() {
-        
         
         adressButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 50).isActive = true
         adressButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
@@ -77,7 +81,7 @@ class ShopViewController: TypeFirstViewController {
         collectionViewFL.topAnchor.constraint(equalTo: searchTextField.bottomAnchor, constant: 20).isActive = true
         collectionViewFL.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
         collectionViewFL.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
-        collectionViewFL.heightAnchor.constraint(equalToConstant: 110).isActive = true
+        collectionViewFL.heightAnchor.constraint(equalToConstant: 200).isActive = true
         
         pageControllFL.topAnchor.constraint(equalTo: collectionViewFL.bottomAnchor).isActive = true
         pageControllFL.centerXAnchor.constraint(equalTo: collectionViewFL.centerXAnchor).isActive = true
@@ -87,8 +91,11 @@ class ShopViewController: TypeFirstViewController {
     func setupModel() {
         self.dataCVFirstLine = FifthLModel.fetchFirstLine()
     }
-        
     
+    @objc func pageDidChange() {
+        let offsetX = UIScreen.main.bounds.width * CGFloat(pageControllFL.currentPage) / 1.5
+        collectionViewFL.setContentOffset(CGPoint(x: offsetX, y: 0), animated: true)
+    }
     
 }
 
@@ -104,13 +111,15 @@ extension ShopViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == collectionViewFL {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.reuseID, for: indexPath) as! CustomCollectionViewCell
-            cell.mainImageViewSecondtype.image = dataCVFirstLine[indexPath.row].mainImageFifthLine
-            cell.mainImageViewSecondtype.backgroundColor = UIColor.customRed
-            cell.mainImageViewSecondtype.layer.cornerRadius = 20
-            cell.mainLabel.text = dataCVFirstLine[indexPath.row].nameFifthLine
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomTwoCVC.reuseID, for: indexPath) as! CustomTwoCVC
+            cell.mainImageView.image = dataCVFirstLine[indexPath.row].mainImageFifthLine
+            cell.mainImageView.backgroundColor = .customLightGrey
+            cell.mainImageView.layer.cornerRadius = 20
+            cell.mainImageView.contentMode = .scaleAspectFit
+            cell.mainImageView.layer.borderColor = UIColor.customRed.cgColor
+            cell.mainImageView.layer.borderWidth = 3
             return cell
-        }else {
+        } else {
             return UICollectionViewCell()
         }
     }
@@ -124,4 +133,13 @@ extension ShopViewController: UICollectionViewDelegate, UICollectionViewDataSour
             return CGSize(width: 0, height: 0)
         }
     }
+}
+
+extension ShopViewController: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        pageControllFL.currentPage = Int(scrollView.contentOffset.x / (UIScreen.main.bounds.width - 2))
+    }
+    
+    
 }
