@@ -2,6 +2,8 @@ import UIKit
 
 class Sale1ViewController: TypeSecondViewController {
     
+    let imagePromo = UIImage(named: "промокод")
+    
     private lazy var labelInfo: UILabel = {
         
         let label = UILabel()
@@ -14,14 +16,15 @@ class Sale1ViewController: TypeSecondViewController {
         label.text = "Promocode seccussed copied!"
         label.font = UIFont(name: "Supertalls", size: 30)
         label.isHidden = true
+        label.clipsToBounds = true
         return label
     }()
     
-    private lazy var subView: [UIView] = [self.labelInfo,
-                                          self.buttonBack,
+    private lazy var subView: [UIView] = [self.buttonBack,
                                           self.labelTitle,
                                           self.labelBody,
-                                          self.buttonPromo]
+                                          self.buttonPromo,
+                                          self.labelInfo]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,8 +39,6 @@ class Sale1ViewController: TypeSecondViewController {
         buttonBack.addTarget(self, action: #selector(pressedButtonBack), for: .touchUpInside)
         buttonPromo.addTarget(self, action: #selector(pressedButtonPromo), for: .touchUpInside)
         buttonPromo.layer.cornerRadius = 30
-        buttonPromo.layer.borderWidth = 3
-        buttonPromo.layer.borderColor = UIColor.black.cgColor
         
         createLabel(label: labelTitle,
                     fontSize: 30,

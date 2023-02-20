@@ -1,13 +1,13 @@
 import UIKit
 
 class TypeSecondViewController: UIViewController {
-
+    
     var buttonBack = UIButton()
+    var buttonPromo = UIButton()
     
     let imageBack = UIImage(systemName: "chevron.backward", withConfiguration: UIImage.SymbolConfiguration(pointSize: 25))
     
     var labelTitle = UILabel()
-    
     var labelBody = UILabel()
     
     
@@ -15,34 +15,23 @@ class TypeSecondViewController: UIViewController {
         super.viewDidLoad()
         
         navigationController?.isNavigationBarHidden = true
+        tabBarController?.tabBar.isHidden = true
         view.backgroundColor = .white
         
     }
-    
     
     func setupView(subViewVC: [UIView]) {
         for view in subViewVC { self.view.addSubview(view)}
     }
     
-    
-    func createLayout(layout: UICollectionViewFlowLayout,
-                      chosenDirection: UICollectionView.ScrollDirection,
-                      minimumLineSpacing: CGFloat){
-        layout.scrollDirection = chosenDirection
-        layout.minimumLineSpacing = minimumLineSpacing
-        layout.minimumInteritemSpacing = 1
-    }
-    
-    func createCollectionView(collectionView: UICollectionView,
-                              layout: UICollectionViewFlowLayout) {
-        collectionView.frame = .zero
-        collectionView.collectionViewLayout = layout
-        collectionView.register(CustomCollectionViewCell.self, forCellWithReuseIdentifier: CustomCollectionViewCell.reuseID)
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.isPagingEnabled = true
-        collectionView.backgroundColor = .clear
-        collectionView.showsVerticalScrollIndicator = false
-        collectionView.showsHorizontalScrollIndicator = false
+    func createLabel(label: UILabel, fontSize: CGFloat, textColor: UIColor, customText: String) {
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = textColor
+        label.font = UIFont(name: "Doloman Pavljenko Light", size: fontSize)
+        label.text = customText
+        label.textAlignment = .left
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
     }
     
     func createButtonText(button: UIButton,
@@ -62,11 +51,7 @@ class TypeSecondViewController: UIViewController {
                            tintColor: UIColor) {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(image, for: .normal)
+        button.clipsToBounds = true
         button.tintColor = tintColor
     }
-    
-    
-    
-    
 }
-

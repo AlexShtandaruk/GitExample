@@ -1,29 +1,43 @@
-//
-//  ModalVC.swift
-//  FoodDelivery
-//
-//  Created by Alex Shtandaruk on 13.02.2023.
-//
-
 import UIKit
 
 class ModalVC: UIViewController {
 
+    private var button: UIButton = {
+        
+        let button = UIButton()
+        button.setTitle("Dismiss", for: .normal)
+        button.addTarget(self, action: #selector(tappedButton), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        view.backgroundColor = .darkGray
+        setupView()
+        setupConstraint()
+        
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func setupView() {
+        
+        view.addSubview(button)
+        
     }
-    */
+    
+    func setupConstraint() {
+        button.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        button.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        button.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
+        button.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        
+    }
+    
+    @objc func tappedButton() {
+        presentingViewController?.dismiss(animated: true)
+        
+    }
 
 }
+

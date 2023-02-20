@@ -18,10 +18,15 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
         textField.backgroundColor = UIColor.customLightGrey
         textField.layer.cornerRadius = 15
         textField.layer.borderColor = UIColor.customRed.cgColor
-        textField.layer.borderWidth = 3
+        textField.layer.borderWidth = 1
         textField.delegate = self
         textField.tag = 1
         textField.returnKeyType = .next
+        //shadow
+        textField.layer.shadowColor = UIColor.black.cgColor
+        textField.layer.shadowRadius = 7
+        textField.layer.shadowOpacity = 0.4
+        textField.layer.shadowOffset = CGSize(width: 15, height: 15)
         
         return textField
     }()
@@ -48,13 +53,13 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
     
     func setupConstraint() {
         
-        buttonBack.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
+        buttonBack.topAnchor.constraint(equalTo: view.topAnchor, constant: 50).isActive = true
         buttonBack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
         buttonBack.widthAnchor.constraint(equalToConstant: 50).isActive = true
         buttonBack.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
-        searchTextField.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
-        searchTextField.leadingAnchor.constraint(equalTo: buttonBack.trailingAnchor, constant: 10).isActive = true
+        searchTextField.topAnchor.constraint(equalTo: buttonBack.bottomAnchor, constant: 10).isActive = true
+        searchTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
         searchTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
         searchTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }

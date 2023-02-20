@@ -9,6 +9,9 @@ class CustomTwoCVC: UICollectionViewCell {
         image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .center
         image.clipsToBounds = true
+        image.layer.borderColor = UIColor.customRed.cgColor
+        image.layer.borderWidth = 1
+        image.layer.cornerRadius = 20
         return image
     }()
     
@@ -32,7 +35,7 @@ class CustomTwoCVC: UICollectionViewCell {
         mainImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         mainImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         mainImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-//        mainImageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+
         
     }
 }

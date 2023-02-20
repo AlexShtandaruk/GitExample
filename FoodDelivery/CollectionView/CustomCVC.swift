@@ -11,8 +11,8 @@ class CustomCVC: UICollectionViewCell {
         image.contentMode = .center
         image.clipsToBounds = true
         image.layer.borderColor = UIColor.customRed.cgColor
-        image.layer.borderWidth = 3
-        image.layer.cornerRadius = 15
+        image.layer.borderWidth = 1
+        image.layer.cornerRadius = 20
         return image
         
     }()

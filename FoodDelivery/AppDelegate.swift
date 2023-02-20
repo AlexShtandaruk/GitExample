@@ -1,10 +1,3 @@
-//
-//  AppDelegate.swift
-//  FoodDelivery
-//
-//  Created by Alex Shtandaruk on 19.01.2023.
-//
-
 import UIKit
 
 @main

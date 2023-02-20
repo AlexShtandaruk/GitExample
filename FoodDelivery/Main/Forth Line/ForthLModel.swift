@@ -6,11 +6,11 @@ struct ForthLModel {
     var mainImageForthLine: UIImage
     
     static func fetchSecondLine() -> [ForthLModel] {
-        let firstItem = ForthLModel(mainImageForthLine: UIImage(named: "магнит")!)
-        let secondItem = ForthLModel(mainImageForthLine: UIImage(named: "пятерочка")!)
-        let theirdItem = ForthLModel(mainImageForthLine: UIImage(named: "метро")!)
-        let forthItem = ForthLModel(mainImageForthLine: UIImage(named: "вкусвилл")!)
-        let fifthItem = ForthLModel(mainImageForthLine: UIImage(named: "жизньмарт")!)
+        let firstItem = ForthLModel(mainImageForthLine: UIImage(named: "store")!)
+        let secondItem = ForthLModel(mainImageForthLine: UIImage(named: "store")!)
+        let theirdItem = ForthLModel(mainImageForthLine: UIImage(named: "store")!)
+        let forthItem = ForthLModel(mainImageForthLine: UIImage(named: "store")!)
+        let fifthItem = ForthLModel(mainImageForthLine: UIImage(named: "store")!)
         
         return [firstItem, secondItem, theirdItem, forthItem, fifthItem]
     }

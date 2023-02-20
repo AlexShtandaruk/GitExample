@@ -2,9 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Для определения местоположения</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>DolomanPavljenko.otf</string>
+		<string>Supertalls.otf</string>
 	</array>
 </dict>
 </plist>
