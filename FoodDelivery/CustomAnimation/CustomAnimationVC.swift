@@ -9,6 +9,8 @@ class CustomAnimationVC: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(tappedButton), for: .touchUpInside)
         return button
+        
+        // add new information
     }()
     
     override func viewDidLoad() {
