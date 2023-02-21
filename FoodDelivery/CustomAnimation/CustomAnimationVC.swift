@@ -11,6 +11,8 @@ class CustomAnimationVC: UIViewController {
         return button
         
         // add new information
+        
+        // удаляем косяки
     }()
     
     override func viewDidLoad() {
