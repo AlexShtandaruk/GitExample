@@ -12,6 +12,7 @@ class CustomAnimationVC: UIViewController {
         
         // add new information
         
+        // удаляем косяки
         
         // новая ветка
     }()
